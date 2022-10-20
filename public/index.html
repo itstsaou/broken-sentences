@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>broken sentences</title>
+
+    <script src="js/tracery.min.js"></script>
+</head>
+<body>
+    <p id="output"></p>
+    <script>
+        let pocGrammar = {
+            "experienceBegin": ["อาหาร"],
+            "concept": ["อาหาร", "เมนู"],
+            "dish": ["ผัดไทย #mainIngredient#", "ก๋วยเตี๋ยว #noodleModifier1# #noodleModifier2#",
+                "ต้มยำกุ้ง", "ส้มตำ", "ยำทะเล", "ข้าวผัด #mainIngredient#", "โจ๊ก #mainIngredient#"
+            ],
+            "noodleModifier1": ["เส้นเล็ก", "เส้นใหญ่", "น้ำ", "แห้ง"],
+            "noodleModifier2": ["น้ำ", "แห้ง"],
+            "mainIngredient": ["กุ้ง", "ปู", "ไก่", "หมู"],
+            "action": ["ขอ", "คิดเงิน"],
+            "experience": ["หวาน", "เปรี้ยว", "เค็ม", "เผ็ด", "จืด", "ขม", "อร่อย"],
+            "experienceModifier": ["มาก", "น้อย", ""],
+            "ending": ["ครับ", "ค่ะ"],
+            "sentence": ["ขอ #dish# #ending#", "คิดเงินด้วย #ending#",
+                "คิดเงินค่า #dish# ด้วย#ending#",
+                "#dish# #experience# #experienceModifier#"
+            ]
+        };
+        let grammar = tracery.createGrammar(pocGrammar);
+
+        let trace = grammar.createTrace();
+        let text = trace.createTraceFromSymbol("sentence");
+
+        let outputEle = document.getElementById("output");
+        outputEle.innerText = text;
+    </script>
+</body>
+</html>
